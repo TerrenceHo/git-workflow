@@ -1,8 +1,8 @@
 # A Successful Git Workflow for Teams
 
-Here at UCLA DevX, small teams work on the same project, pushing commits. Here we describe a workflow that has proven to work well in our teams, and heavily encourage you and your teams to adopt. This workflow details how to manage a code repository so that development is quick, production releases are simple, and fewer code conflicts are possible (less chance of leaving the git repository in a hard-to-salvage-state-that-requires-git-magic.)
+Here at UCLA DevX, individual developers work on small teams, pushing commits to shared projects. Here we describe a workflow that has proven to work well for all our teams, and we heavily encourage you and your teams to adopt it. This workflow details how to manage a code repository so that development is quick, production releases are simple, and fewer code conflicts are possible (less chance of leaving the git repository in a hard-to-salvage-state-that-requires-git-magic.)
 
-_Note that this tutorial already assumes you know how to use git_.
+_Note that this tutorial assumes you have a general understanding of version control and basic knowledge of using git_.
 
 ### Github/Central Repository
 Although Git was developed to be a decentralized version control system, common usage has devolved to being a centralized version control system. For the rest of the article, we refer to _origin_ as the central repository where a member can clone the repository, commit changes, and push code.  For many, GitHub is this central repository. 

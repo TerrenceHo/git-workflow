@@ -7,20 +7,29 @@ At UCLA DevX, individual developers work on small teams, pushing commits to shar
 
 
 ### Github/Central Repository
-Although Git was developed to be a decentralized version control system, common usage has devolved to being a centralized version control system. For the rest of the article, we refer to _origin_ as the central repository where a member can clone the repository, commit changes, and push code.  For many, GitHub is this central repository. 
+Although Git was developed to be a decentralized version control system, common usage has devolved to being a centralized version control system. For the rest of the article, **we refer to _origin_ as the central repository where a member can clone the repository, commit changes, and push code.**  For many, GitHub is this central repository. 
 
-We may also refer to a remote called _upstream_, where you did not clone your code initially, but is still where you want your commits to be merged into. This only has relevance in forking.
+We may also refer to a remote called **_upstream_**, where you did not clone your code initially, but is still where you want your commits to be merged into. This only has relevance in forking.
 
-When working in a small team, when you have created new commits and are ready to let others use your new code, or just want to have another copy somewhere else, you push your code to _origin_. Once push to _origin_, others can pull/clone your code easily and run it at their leisure.  This also allows two or more develops to work on the same branch/feature together, where they push and pull from the same branch on _origin_.
+When you have created new commits and are ready for others to use your new code, you push your code to _origin_. **Once pushed to _origin_, others can pull/clone your code easily and run it locally.** 
+This also allows two or more developers to:
+- easily share and view each other's code
+- collaborate on a branch/feature together, where they push and pull from the same branch on _origin_
 
 ![central_repository](http://puredev.eu/wp-old-content/2011/08/image2.png)
 
 #### Person-to-Person Fetches
-It is possible that two developers may not want to share their branch to the central repository, for fear that a third person may work off their code, and introduce complicated, migraine-inducing merge conflicts.  In this case, git supports developer-to-developer code pulls, but that is beyond the scope of this article.
+It is possible that two developers may not want to share their branch to the central repository, for fear that a third person may work off their code, and introduce merge conflicts.  In this case, git supports developer-to-developer code pulls, called **person-to-person fetches**, but that is beyond the scope of this article.
 
 ### Master and Develop Branches
 
-To develop a feature, make a branch. Branch naming semantics can be left up to the team, aside from these protected names: _master_, _develop_, and _patch_. (Patches will be discussed later)
+To develop a feature, make a branch using the following steps:
+```
+$ git branch //to make sure you are on master
+$ git checkout -b <branch_name> 
+```
+**//wait ive never used develop vs feature branches for firefox so idek if this is necessary but up to u**
+Branch naming semantics can be left up to the team, aside from these protected names: _master_, _develop_, and _patch_. (Patches will be discussed later) 
 
 The _master_ branch should be stable. No one should be able to push directly to master. Any new member should be able to clone master, and run off the latest __stable__ version of your software, with no potential bugs.  Why? The reason being, we require a branch to mark releases and tag versions with, a branch that is not constantly changed all the time.  That way, no broken features are left on the _master_ branch. 
 
@@ -38,7 +47,7 @@ Additioanlly, since _master_ is strictly related to production code, a script/we
 
 ### Feature Branches
 
-Even with _master_ locked down, we do not want developers pushing nilly wily to _develop_ either. _Develop_ represents the working tip, not broken tip. We want code in _develop_ to work, albeit not production ready. _Develop_ should be left in a state where anyone can pull the branch and work off it.
+Even with _master_ locked down, we do not want developers pushing nilly willy to _develop_ either. _Develop_ represents the working tip, not broken tip. We want code in _develop_ to work, albeit not production ready. _Develop_ should be left in a state where anyone can pull the branch and work off it.
 
 Instead, create a new branch, that branches off from _develop_. Feature branches branch off from develop, and __must__ merge back into develop, if it is merged at all. To ensure that you branch off from _develop_, use the command: 
 ```
@@ -50,6 +59,7 @@ When you are done creating the feature, merge the feature branch back into the _
 
 Note that almost no one should develop off another feature branch to make a feature, unless you coordinate closely.  Always branch off _develop_.  Treat other branches as though you did not own them. 
 
+**//no one would take the time to work through this logic of a paragraph**
 Consider branch _featureA_ that was branched off _develop_. A new function _coolFunc_ was made. _featureB_ branches off _featureA_, and uses _coolFunc_ to implement their feature. However, _featureA_ continues to commit off his branch, and realizes that a better implementation of _coolFunc_ was possible. Now you have diverging paths of code, that rely on the same namespace.  Eventually, _coolFunc_ will cause a merge conflict, if both branches are merged back in, and this must be resolved. If _coolFunc_ diverged enough, one of the branches may be invalidated and require extensive rework. (This disregards the order of merging, another complication)
 
 _featureB_ should have 1) merged off of _develop_, to work off clean code, and 2) either waited for _featureA_'s function to become stable, or implemented their own version.  By always branching off of _develop_, situations like these are easily avoided.
@@ -60,6 +70,7 @@ All code has bugs. It just depends on how many. And sometimes you can't wait for
 
 Patch branches introduce code to fix a big.  They are branched from _master_, (where the bug exists), and merged back into _master_ and _develop_.  It must be merged back into both, so that _master_ does not have functionality that does not exist in _develop_. We do not branch off _develop_, because that branch may have moved beyond _master_, and merging the hotfix into _master_ will also introduce newer, less tested code.
 
+**//can u add code snippets**
 ![patches](https://nvie.com/img/hotfix-branches@2x.png)
 
 ### Overall Workflow
@@ -73,7 +84,7 @@ You can even throw in other branches between _develop_ and _master_, such as a _
 
 #### Fast forward or not?
 When merging should you use the `--no-ff` option?
-
+**//can u give the full command for context please**
 When merging with `--no-ff`, you exclude a merge commit, an extra commit denoting that a code merge was made at this point in the history.  If you do not make a merge commit, a feature branch fits directly into the history, with no indication it was created in a branch. The difference can be seen when you use `git log --graph`. 
 
 Some people like having the merge commit, because it keeps it more true to the history. On the other hand, many like not having the merge commit, because it keeps the history cleaner, more linear, and easier to read.  This should be decided in teams.
@@ -81,6 +92,30 @@ Some people like having the merge commit, because it keeps it more true to the h
 ![fast_forward](https://nvie.com/img/merge-without-ff@2x.png)
 
 #### Rebasing
+
+Let's say you've been working on a feature branch for a while, and since you made the branch, many others have pushed to master. In this case, you would want to update, or **rebase**, your branch. You can even rebase master on your own forked repository with these steps:
+ ```
+ # Add the remote, call it "upstream":
+
+git remote add upstream https://github.com/whoever/whatever.git
+
+# Fetch all the branches of that remote into remote-tracking branches,
+# such as upstream/master:
+
+git fetch upstream
+
+# Make sure that you're on your master branch:
+
+git checkout master
+
+# Rewrite your master branch so that any commits of yours that
+# aren't already in upstream/master are replayed on top of that
+# other branch:
+
+git rebase upstream/master
+
+git push origin master
+```
 
 Rebasing is the act of taking a branch, and moving it to the tip of another branch. Here, we move a feature branch on top of a _master_ branch. Afterwords, you can fast-forward your branch so that master sits at the tip. You are basically rewriting history, in an effort to keep your history linear. No "merge commit" is created, and the history remains linear.
 

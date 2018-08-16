@@ -18,13 +18,13 @@ It is possible that two developers may not want to share their branch to the cen
 
 ### Master and Develop Branches
 
-To develop a feature, make a branch. Branch naming semantics can be left up to the team, aside from these protected names: _master_, _develop_, and _patch_. (Patches will be discussed later)
+To _develop_ a feature, make a branch. Branch naming semantics can be left up to the team, aside from these protected names: _master_, _develop_, and _patch_. (Patches will be discussed later)
 
-The _master_ branch should be stable. No one should be able to push directly to master. Any new member should be able to clone master, and run off the latest __stable__ version of your software, with no potential bugs.  Why? The reason being, we require a branch to mark releases and tag versions with, a branch that is not constantly changed all the time.  That way, no broken features are left on the _master_ branch. 
+The _master_ branch should be stable. No one should be able to push directly to _master_. Any new member should be able to clone _master_, and run off the latest __stable__ version of your software, with no potential bugs.  Why? The reason being, we require a branch to mark releases and tag versions with, a branch that is not constantly changed all the time.  That way, no broken features are left on the _master_ branch. 
 
 Instead, code is pushed to a _develop_ branch. The tip of _develop_ is always at least even with the _master_ branch, and almost always ahead in commits.  When code is in _develop_ is ready for production, it is merged into _master_, tagged with a version, and marked as a release.
 
-This should almost always be a fast-forward merge, rather than a recursive merge. The illustration below shows a develop and master branch in action.
+This should almost always be a fast-forward merge, rather than a recursive merge. The illustration below shows a _develop_ and _master_ branch in action.
 
 ![master_develop](https://nvie.com/img/main-branches@2x.png)
 
@@ -32,7 +32,7 @@ This has many benefits. If you were to make nightly builds (latest builds with n
 
 Additioanlly, since _master_ is strictly related to production code, a script/webhook can be triggered when a commit is pushed to _master_ and automatically roll out to production.
 
-(We highly recommend that on Github, pushing code directly to master is not allowed. Instead, pull requests must be made to propose and merge code.)
+(We highly recommend that on Github, pushing code directly to _master_ is not allowed. Instead, pull requests must be made to propose and merge code.)
 
 ### Feature Branches
 
@@ -80,11 +80,11 @@ Some people like having the merge commit, because it keeps it more true to the h
 
 #### Rebasing
 
-Rebasing is the act of taking a branch, and moving it to the tip of another branch. Here, we move a feature branch on top of a _master_ branch. Afterwords, you can fast-forward your branch so that master sits at the tip. You are basically rewriting history, in an effort to keep your history linear. No "merge commit" is created, and the history remains linear.
+Rebasing is the act of taking a branch, and moving it to the tip of another branch. Here, we move a feature branch on top of a _master_ branch. Afterwords, you can fast-forward your branch so that _master_ sits at the tip. You are basically rewriting history, in an effort to keep your history linear. No "merge commit" is created, and the history remains linear.
 
 ![rebase](https://wac-cdn.atlassian.com/dam/jcr:5b153a22-38be-40d0-aec8-5f2fffc771e5/03.svg?cdnVersion=jo)
 
-If you rebased master on top of your feature branch, the history would look like this. 
+If you rebased _master_ on top of your feature branch, the history would look like this. 
 
 ![rebase_wrong](https://wac-cdn.atlassian.com/dam/jcr:1d22f018-b2c7-4096-9db1-c54940cf4f4e/05.svg?cdnVersion=jo)
 

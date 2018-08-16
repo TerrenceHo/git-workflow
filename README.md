@@ -28,14 +28,13 @@ To develop a feature, make a branch using the following steps:
 $ git branch //to make sure you are on master
 $ git checkout -b <branch_name> 
 ```
-**//wait ive never used develop vs feature branches for firefox so idek if this is necessary but up to u**
 Branch naming semantics can be left up to the team, aside from these protected names: _master_, _develop_, and _patch_. (Patches will be discussed later) 
 
-The _master_ branch should be stable. No one should be able to push directly to master. Any new member should be able to clone master, and run off the latest __stable__ version of your software, with no potential bugs.  Why? The reason being, we require a branch to mark releases and tag versions with, a branch that is not constantly changed all the time.  That way, no broken features are left on the _master_ branch. 
+The _master_ branch should be stable. No one should be able to push directly to _master_. Any new member should be able to clone _master_, and run off the latest __stable__ version of your software, with no potential bugs.  Why? The reason being, we require a branch to mark releases and tag versions with, a branch that is not constantly changed all the time.  That way, no broken features are left on the _master_ branch. 
 
 Instead, code is pushed to a _develop_ branch. The tip of _develop_ is always at least even with the _master_ branch, and almost always ahead in commits.  When code is in _develop_ is ready for production, it is merged into _master_, tagged with a version, and marked as a release.
 
-This should almost always be a fast-forward merge, rather than a recursive merge. The illustration below shows a develop and master branch in action.
+This should almost always be a fast-forward merge, rather than a recursive merge. The illustration below shows a _develop_ and _master_ branch in action.
 
 ![master_develop](https://nvie.com/img/main-branches@2x.png)
 
@@ -43,7 +42,7 @@ This has many benefits. If you were to make nightly builds (latest builds with n
 
 Additioanlly, since _master_ is strictly related to production code, a script/webhook can be triggered when a commit is pushed to _master_ and automatically roll out to production.
 
-(We highly recommend that on Github, pushing code directly to master is not allowed. Instead, pull requests must be made to propose and merge code.)
+(We highly recommend that on Github, pushing code directly to _master_ is not allowed. Instead, pull requests must be made to propose and merge code.)
 
 ### Feature Branches
 
@@ -121,7 +120,7 @@ Rebasing is the act of taking a branch, and moving it to the tip of another bran
 
 ![rebase](https://wac-cdn.atlassian.com/dam/jcr:5b153a22-38be-40d0-aec8-5f2fffc771e5/03.svg?cdnVersion=jo)
 
-If you rebased master on top of your feature branch, the history would look like this. 
+If you rebased _master_ on top of your feature branch, the history would look like this. 
 
 ![rebase_wrong](https://wac-cdn.atlassian.com/dam/jcr:1d22f018-b2c7-4096-9db1-c54940cf4f4e/05.svg?cdnVersion=jo)
 
